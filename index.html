@@ -52,7 +52,7 @@ wrap(a);
 var countdown = "";
 function updateCountdown() {
     var now = (new Date()).getTime()/1000;
-    var sec = 1602940560-now;
+    var sec = 1635596160-now;
     if (sec <= 0) {
         countdown = "";
     }
@@ -69,7 +69,12 @@ function updateCountdown() {
     
     var p = [days, hours, minutes];
     countdown = [" dia", " hora", " minuto"]
-        .map((v, i) => p[i] + v + (p[i] != 1 ? "s" : ""))
+        .map((v, i) => {
+            if (!p[i] || p[i] < 0) {
+                p[i] = 0;
+            }
+            return p[i] + v + (p[i] != 1 ? "s" : "");
+        })
         .join(" / ");
 }
 
